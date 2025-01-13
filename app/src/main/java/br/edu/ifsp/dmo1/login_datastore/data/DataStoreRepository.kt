@@ -33,6 +33,12 @@ class DataStoreRepository(context: Context) {
             preferences[PreferencesKeys.STAY_LOGGED_IN] = stayLoggedIn
         }
     }
+
+    suspend fun logoutChange () {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.STAY_LOGGED_IN] = false
+        }
+    }
     //flow é kotlin.courotines
 
     val loginPreferences: Flow<Pair<Boolean, Boolean>> = dataStore.data.map { preferences ->
